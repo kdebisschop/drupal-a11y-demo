@@ -27,10 +27,6 @@ jobs:
         with:
          node-version: '12'
 
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@master"
-
       - name: Setup PHP
         id: php-setup
         uses: shivammathur/setup-php@v2
