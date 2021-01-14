@@ -1,0 +1,16 @@
+{
+  "defaults": {
+    "concurrency": 1,
+    "chromeLaunchConfig": {
+      "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "headless": true,
+      "ignoreHTTPSErrors": false,
+      "args": ["--no-sandbox"]
+    },
+    "standard": "WCAG2AA",
+    "timeout": 45000
+  },
+  "urls": [
+    "http://localhost:8099/"
+  ]
+}
