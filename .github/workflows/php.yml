@@ -56,11 +56,11 @@ jobs:
 
       - name: Generate content
         run: |
-          vendor/bin/drush site:install standard --no-interaction --site-name "Drupa11y"
-          vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
-          vendor/bin/drush devel-generate:content 10 --bundles=article
-          vendor/bin/drush devel-generate:content 10 --bundles=page
-          vendor/vin/drush simple-sitemap:generate
           cd web
+          ../vendor/bin/drush site:install standard --no-interaction --site-name "Drupa11y"
+          ../vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
+          ../vendor/bin/drush devel-generate:content 10 --bundles=article
+          ../vendor/bin/drush devel-generate:content 10 --bundles=page
+          ../vendor/vin/drush simple-sitemap:generate
           php -S localhost:8080 .ht.router.php &
           pa11y-ci -c ../.pa11yci --sitemap http://localhost:8080/sitemap.xml
