@@ -48,7 +48,7 @@ jobs:
             ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+#        if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --ignore-platform-reqs --prefer-dist --no-progress --no-suggest
 
       - name: Install node
@@ -57,6 +57,8 @@ jobs:
       - name: Generate content
         run: |
           cd web
+          pwd
+          ls -l
           ../vendor/bin/drush site:install standard --no-interaction --site-name "Drupa11y"
           ../vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
