@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
 
       - name: Install dependencies
-#        if: steps.composer-cache.outputs.cache-hit != 'true'
+        if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --ignore-platform-reqs --prefer-dist --no-progress --no-suggest
 
       - name: Install node
@@ -46,10 +46,18 @@ jobs:
           pwd
           whoami
           ls -l . sites sites/default
-          ../vendor/bin/drush -vvv -n --yes site:install standard
-          ../vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
+          ../vendor/bin/drush -n --yes site:install standard
+          ../vendor/bin/drush pm:enable devel devel_generate
+          ../vendor/bin/drush pm:enable simple_sitemap
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
           ../vendor/bin/drush simple-sitemap:generate
-          php -S localhost:8080 .ht.router.php &
-          pa11y-ci -c ../.pa11yci --sitemap http://localhost:8080/sitemap.xml
+          php -S localhost:8099 .ht.router.php &
+          pa11y-ci -c ../.pa11yci
+          curl http://localhost:8099/sitemap.xml | head -n 3 > map.xml
+          printf '<url><loc>' >> map.xml
+          ../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli / >>  map.xml
+          echo '</url></loc>' >> map.xml
+          curl http://localhost:8099/sitemap.xml |grep '^<url><loc>' >> map.xml
+          echo '</urlset>' >> map.xml
+          pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/sitemap.xml

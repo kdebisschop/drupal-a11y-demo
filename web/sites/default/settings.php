@@ -282,7 +282,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = '9W2V8qyrHBw8YEzx0Bm9lv1yvPvyd11Lk1Jcg812j52VCGNgu1YRPqu9uv_eODQOnVXuStNyjA';
 
 /**
  * Deployment identifier.
@@ -784,3 +784,10 @@ $databases['default']['default'] = [
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+$databases['default']['default'] = array (
+  'database' => '/Users/debisschop/PhpstormProjects/drupa11y/web/sites/default/../../../drupally.sqlite',
+  'prefix' => '',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite',
+  'driver' => 'sqlite',
+);
+$settings['config_sync_directory'] = 'sites/default/files/config_EHK58tSVqsWSdiLEneCFag2nu8t2d3O1LRzWMbltFs8UC91sIoerMCXM2tePRZTNOrVGU4ixkA/sync';
