@@ -43,9 +43,6 @@ jobs:
       - name: Generate content
         run: |
           cd web
-          pwd
-          whoami
-          ls -l . sites sites/default
           ../vendor/bin/drush -n --yes site:install
           ../vendor/bin/drush pm:enable devel devel_generate
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
