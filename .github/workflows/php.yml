@@ -59,7 +59,7 @@ jobs:
           cd web
           pwd
           ls -l
-          ../vendor/bin/drush -n --yes site:install --db-url=sqlite://tmp/drupa11y.sqlite --site-name="Drupa11y"
+          ../vendor/bin/drush -n --yes site:install --db-url=sqlite:///tmp/drupa11y.sqlite --site-name="Drupa11y"
           ../vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
