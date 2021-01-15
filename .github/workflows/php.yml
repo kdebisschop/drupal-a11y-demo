@@ -47,9 +47,9 @@ jobs:
           ../vendor/bin/drush pm:enable devel devel_generate
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
+          php -S localhost:8099 .ht.router.php &
           ../vendor/bin/drush pm:enable simple_sitemap
           ../vendor/bin/drush simple-sitemap:generate
-          php -S localhost:8099 .ht.router.php &
           pa11y-ci -c ../.pa11yci
           curl http://localhost:8099/sitemap.xml | head -n 3 > map.xml
           printf '<url><loc>' >> map.xml
