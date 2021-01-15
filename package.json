@@ -4,12 +4,10 @@
   "dependencies": {},
   "devDependencies": {
     "jshint": "^2",
-    +   "pa11y-ci": "~1.0",
+    "pa11y-ci": "~1.0",
     "your-other-dependencies": "~3.5"
   },
   "scripts": {
-    "start": "node app",
-    "test": "make test",
-    +   "test-pa11y": "./node_modules/.bin/pa11y-ci"
+    "start": "node app"
   }
 }
