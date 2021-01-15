@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6830521ffc575a4e43e3c65c673f0e7b",
+    "content-hash": "11d5b61bd217313bdd92c06acd860e8b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1757,6 +1757,9 @@
                     "services": {
                         "drush.services.yml": "^9 || ^10"
                     }
+                },
+                "patches_applied": {
+                    "PHP-8": "https://www.drupal.org/files/issues/2020-12-07/simple_sitemap-php8-error-1.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
