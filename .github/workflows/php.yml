@@ -54,3 +54,9 @@ jobs:
       - name: Install node
         run: npm install
 
+      - name: Generate content
+        run: |
+          vendor/bin/drush site:install standard --no-interaction --site-name "Drupa11y"
+          vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
+          vendor/bin/drush genc 10 --bundles=article
+          vendor/bin/drush genc 10 --bundles=page
