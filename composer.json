@@ -55,6 +55,9 @@
         "patches": {
             "drupal/core": {
                 "Show drush install errors": "patches/show-drush-install-error.patch"
+            },
+            "drupal/simple_sitemap": {
+                "PHP-8": "https://www.drupal.org/files/issues/2020-12-07/simple_sitemap-php8-error-1.patch"
             }
         }
     }
