@@ -1,0 +1,12 @@
+diff -u a/core/includes/install.core.inc b/core/includes/install.core.inc
+--- a/core/includes/install.core.inc      2021-01-15 11:59:10.214469906 -0500
++++ b/core/includes/install.core.inc      2021-01-06 20:42:38.000000000 -0500
+@@ -2282,7 +2282,7 @@
+         // proceed in a single request so there is no good opportunity (and no
+         // good method) to warn the user anyway.
+         if (isset($requirement['severity']) && $requirement['severity'] == REQUIREMENT_ERROR) {
+-          $failures[] = $requirement['title'] . ': ' . $requirement['value'] . "\n\n" . $requirement['description'];
++          $failures[] = $requirement['title'] . ': ' . $requirement['value'] . "\n\n" . print_r($requirement['description'], TRUE);
+         }
+       }
+       if (!empty($failures)) {
