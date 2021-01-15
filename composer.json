@@ -7,10 +7,6 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "vcs",
-            "url": "https://git.drupalcode.org/project/xmlsitemap"
         }
     ],
     "require": {
@@ -19,6 +15,7 @@
         "drupal/core-composer-scaffold": "^9.1",
         "drupal/core-project-message": "^9.1",
         "drupal/core-recommended": "^9.1",
+        "drupal/simple_sitemap": "~3.8",
         "drupal/sitemap": "~2.0",
         "drush/drush": "^10.3"
     },
