@@ -44,7 +44,8 @@ jobs:
         run: |
           cd web
           pwd
-          ls -l
+          whoami
+          ls -l . sites sites/default
           ../vendor/bin/drush -vvv -n --yes site:install standard
           ../vendor/bin/drush pm:enable devel devel_generate simple_sitemap sitemap
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
