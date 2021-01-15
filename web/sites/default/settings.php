@@ -764,7 +764,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 
 $databases['default']['default'] = [
   'driver' => 'sqlite',
-  'database' => __DIR__ . '/files/.drupa11y.sqlite',
+  'database' => __DIR__ . '/../../../drupally.sqlite',
 ];
 
 /**
