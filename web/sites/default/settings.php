@@ -282,7 +282,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-# $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');;
+$settings['hash_salt'] = '';
 
 /**
  * Deployment identifier.
@@ -780,6 +780,7 @@ $databases['default']['default'] = [
  *
  * Keep this code block at the end of this file to take full effect.
  */
-//if (file_exists(__DIR__ . '/settings.local.php')) {
-//  include __DIR__ . '/settings.local.php';
-//}
+#
+# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+#   include $app_root . '/' . $site_path . '/settings.local.php';
+# }
