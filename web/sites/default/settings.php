@@ -282,7 +282,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'Mveu3hsCvLmnXy5Nb7r2sQ6fzj2jhG4Gjw5FLdc8Whw7kFt9RQK7VFfjcVN58u0sFY0YWTtjBw';
+# $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');;
 
 /**
  * Deployment identifier.
@@ -779,10 +779,10 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 if (file_exists(__DIR__ . '/settings.local.php')) {
   include __DIR__ . '/settings.local.php';
 }
-$databases['default']['default'] = array (
-  'database' => '/var/tmp/njmeetup.sqlite',
+
+$databases['default']['default'] = [
+  'database' => sys_get_temp_dir() . '/drupa11y.sqlite',
   'prefix' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite',
   'driver' => 'sqlite',
-);
-$settings['config_sync_directory'] = 'sites/default/files/config_eZo-vhBVOZy_gnZWchsB24BPq4nZQLQw_DFRxEs-6xmqbW0T3anPjLZxO3LPunXna890f0HoGw/sync';
+];
