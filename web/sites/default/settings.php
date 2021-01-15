@@ -765,7 +765,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 $databases['default']['default'] = [
   'driver' => 'sqlite',
   'database' => sys_get_temp_dir() . '/drupa11y.sqlite',
- ];
+];
 
 /**
  * Load local development override configuration, if available.
