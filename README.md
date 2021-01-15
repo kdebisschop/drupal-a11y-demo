@@ -13,10 +13,10 @@ Create web/sites/settings.local.php:
 ```php
 <?php
 $databases['default']['default'] = [
+  'driver' => 'sqlite',
   'database' => sys_get_temp_dir() . '/drupa11y.sqlite',
   'prefix' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite',
-  'driver' => 'sqlite',
 ];
 ```
 

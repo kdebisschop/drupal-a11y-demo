@@ -763,11 +763,9 @@ $settings['entity_update_backup'] = TRUE;
 $settings['migrate_node_migrate_type_classic'] = FALSE;
 
 $databases['default']['default'] = [
-  'database' => sys_get_temp_dir() . '/drupa11y.sqlite',
-  'prefix' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite',
   'driver' => 'sqlite',
-];
+  'database' => sys_get_temp_dir() . '/drupa11y.sqlite',
+ ];
 
 /**
  * Load local development override configuration, if available.
@@ -782,7 +780,6 @@ $databases['default']['default'] = [
  *
  * Keep this code block at the end of this file to take full effect.
  */
-
-if (file_exists(__DIR__ . '/settings.local.php')) {
-  include __DIR__ . '/settings.local.php';
-}
+//if (file_exists(__DIR__ . '/settings.local.php')) {
+//  include __DIR__ . '/settings.local.php';
+//}
