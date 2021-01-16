@@ -57,4 +57,4 @@ jobs:
           echo '</url></loc>' >> map.xml
           curl http://localhost:8099/sitemap.xml |grep '^<url><loc>' >> map.xml
           echo '</urlset>' >> map.xml
-          pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml
+          ../node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml
