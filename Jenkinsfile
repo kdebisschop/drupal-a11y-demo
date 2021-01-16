@@ -1,6 +1,6 @@
 pipeline {
 
-  agent { 'any'}
+  agent any
 
   options {
     ansiColor('xterm')
@@ -9,14 +9,16 @@ pipeline {
   stages {
 
     stage('Build:') {
-      sh """
-        composer install --ignore-platform-reqs --prefer-dist --no-progress --no-suggest
-        cd web
-        ../vendor/bin/drush -n --yes site:install
-        ../vendor/bin/drush pm:enable devel devel_generate
-        ../vendor/bin/drush devel-generate:content 10 --bundles=article
-        ../vendor/bin/drush devel-generate:content 10 --bundles=page
-      """
+      steps {
+        sh """
+          composer install --ignore-platform-reqs --prefer-dist --no-progress --no-suggest
+          cd web
+          ../vendor/bin/drush -n --yes site:install
+          ../vendor/bin/drush pm:enable devel devel_generate
+          ../vendor/bin/drush devel-generate:content 10 --bundles=article
+          ../vendor/bin/drush devel-generate:content 10 --bundles=page
+        """
+      }
     }
 
     stage ('Scan:') {
