@@ -52,11 +52,13 @@ jobs:
 
       - name: Scan Site as Anonymous
         run: |
+          cd web
           php -S localhost:8099 .ht.router.php &
           ../node_modules/.bin/pa11y-ci -c ../.pa11yci
 
       - name: Scan Site as Admin
         run: |
+          cd web
           php -S localhost:8099 .ht.router.php &
           curl http://localhost:8099/sitemap.xml | head -n 3 > map.xml
           printf '<url><loc>' >> map.xml
