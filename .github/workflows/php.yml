@@ -59,12 +59,12 @@ jobs:
       - name: Scan Site as Admin
         run: |
           cd web
-          curl -s http://localhost:8099/sitemap.xml | head -n 3 > map.xml
+          curl -s -o map-source.xml http://localhost:8099/sitemap.xml
+          grep -Ev '^ *<(url|/urlset)>' map-source.xml > map.xml
           printf '<url><loc>' >> map.xml
-          ../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli / >>  map.xml
+          ../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli / >> map.xml
           echo '</url></loc>' >> map.xml
-          cat map.xml
-          curl -s http://localhost:8099/sitemap.xml | grep '^<url><loc>' >> map.xml
+          grep '^ *<url><loc>' map-source.xml >> map.xml
           echo '</urlset>' >> map.xml
           cat map.xml
           ../node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml || echo "Errors Found!"
