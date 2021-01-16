@@ -30,7 +30,7 @@ pipeline {
           php ../scripts/spider.php > map-source.xml
           ../node_modules/.bin/pa11y-ci --sitemap http://127.0.0.1:8099/map-source.xml || echo "Errors Found!"
           head -n 2 map-source.xml > map.xml
-          printf "  <url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://127.0.0.1:8099/ --no-browser uli /)" >> map.xml
+          printf "  <url><loc>%s</url></loc>\n" "\$(../vendor/bin/drush --uri=http://127.0.0.1:8099/ --no-browser uli /)" >> map.xml
           grep '^ ' map-source.xml >> map.xml
           echo '</urlset>' >> map.xml
           ../node_modules/.bin/pa11y-ci --sitemap http://127.0.0.1:8099/map.xml || echo "Errors Found!"
