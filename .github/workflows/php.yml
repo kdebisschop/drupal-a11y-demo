@@ -55,11 +55,12 @@ jobs:
           cd web
           # First scan as anonymous.
           php ../scripts/spider.php > sites/default/files/map-source.xml
+          cat sites/default/files/map-source.xml
           ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map-source.xml || echo "Errors Found!"
           # Then scan as user 1.
-          head -n 1 sites/default/files/map-source.xml > sites/default/files/map.xml
+          head -n 2 sites/default/files/map-source.xml > sites/default/files/map.xml
           printf "  <url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> sites/default/files/map.xml
-          grep '^ ' map-source.xml >> sites/default/files/map.xml
+          grep '^ ' sites/default/files/map-source.xml >> sites/default/files/map.xml
           echo '</urlset>' >> sites/default/files/map.xml
-          cat map.xml
+          cat sites/default/files/map.xml
           ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map.xml || echo "Errors Found!"
