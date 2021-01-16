@@ -53,16 +53,16 @@ jobs:
         run: |
           cd web
           php -S localhost:8099 .ht.router.php 2>&1 > /dev/null &
-          php ../scripts/spider.php > map-source.xml
-          ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/map-source.xml || echo "Errors Found!"
+          php ../scripts/spider.php > sites/default/files/map-source.xml
+          ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map-source.xml || echo "Errors Found!"
 
       - name: Scan Site as Admin
         run: |
           cd web
           php -S localhost:8099 .ht.router.php 2>&1 > /dev/null &
-          head -n 1 map-source.xml > map.xml
-          printf "<url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> map.xml
-          grep '^ ' map-source.xml >> map.xml
-          echo '</urlset>' >> map.xml
+          head -n 1 sites/default/files/map-source.xml > sites/default/files/map.xml
+          printf "  <url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> sites/default/files/map.xml
+          grep '^ ' map-source.xml >> sites/default/files/map.xml
+          echo '</urlset>' >> sites/default/files/map.xml
           cat map.xml
-          ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/map.xml || echo "Errors Found!"
+          ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map.xml || echo "Errors Found!"
