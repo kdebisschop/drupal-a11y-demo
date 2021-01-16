@@ -43,6 +43,10 @@ jobs:
       - name: Generate content
         run: |
           cd web
+          pwd
+          ls -a /usr/local/bin
+          ls -a /home/runner/work/drupal-a11y-demo/drupal-a11y-demo/node_modules
+          ls -a /home/runner/work/drupal-a11y-demo/drupal-a11y-demo/node_modules/.bin
           ../vendor/bin/drush -n --yes site:install
           ../vendor/bin/drush pm:enable devel devel_generate
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
@@ -57,4 +61,4 @@ jobs:
           echo '</url></loc>' >> map.xml
           curl http://localhost:8099/sitemap.xml |grep '^<url><loc>' >> map.xml
           echo '</urlset>' >> map.xml
-          ../node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml
+          /home/runner/work/drupal-a11y-demo/drupal-a11y-demo/node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml
