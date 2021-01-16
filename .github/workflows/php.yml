@@ -60,10 +60,12 @@ jobs:
         run: |
           cd web
           curl -s http://localhost:8099/sitemap.xml > map-source.xml
-          cat map-source.xml
-          grep -Ev '^ *<(url|/urlset)>' map-source.xml > map.xml
+          grep -Ev '^ ' map-source.xml > map.xml
+          cat map.xml
           printf "<url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> map.xml
-          grep '^ *<url><loc>' map-source.xml >> map.xml
+          cat map.xml
+          grep '^ ' map-source.xml >> map.xml
+          cat map.xml
           echo '</urlset>' >> map.xml
           cat map.xml
           ../node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml || echo "Errors Found!"
