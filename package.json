@@ -4,7 +4,8 @@
   "dependencies": {},
   "devDependencies": {
     "jshint": "^2",
-    "pa11y-ci": "~1.0"
+    "pa11y-ci": "~1.0",
+    "pa11y-ci-reporter-html": "~2.1"
   },
   "scripts": {
     "start": "node app"
