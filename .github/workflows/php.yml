@@ -40,25 +40,28 @@ jobs:
       - name: Install node
         run: npm install
 
-      - name: Generate content
+      - name: Install Site and Generate content
         run: |
           cd web
-          pwd
-          ls -a /usr/local/bin
-          ls -a /home/runner/work/drupal-a11y-demo/drupal-a11y-demo/node_modules
-          ls -a /home/runner/work/drupal-a11y-demo/drupal-a11y-demo/node_modules/.bin
           ../vendor/bin/drush -n --yes site:install
           ../vendor/bin/drush pm:enable devel devel_generate
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
-          php -S localhost:8099 .ht.router.php &
           ../vendor/bin/drush pm:enable simple_sitemap
           ../vendor/bin/drush simple-sitemap:generate
-          pa11y-ci -c ../.pa11yci
+
+      - name: Scan Site as Anonymous
+        run: |
+          php -S localhost:8099 .ht.router.php &
+          /usr/local/bin/pa11y-ci -c ../.pa11yci
+
+      - name: Scan Site as Admin
+        run: |
+          php -S localhost:8099 .ht.router.php &
           curl http://localhost:8099/sitemap.xml | head -n 3 > map.xml
           printf '<url><loc>' >> map.xml
           ../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli / >>  map.xml
           echo '</url></loc>' >> map.xml
           curl http://localhost:8099/sitemap.xml |grep '^<url><loc>' >> map.xml
           echo '</urlset>' >> map.xml
-          /home/runner/work/drupal-a11y-demo/drupal-a11y-demo/node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml
+          /usr/local/bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map.xml
