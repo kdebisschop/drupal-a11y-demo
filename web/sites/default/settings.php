@@ -282,7 +282,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'Mveu3hsCvLmnXy5Nb7r2sQ6fzj2jhG4Gjw5FLdc8Whw7kFt9RQK7VFfjcVN58u0sFY0YWTtjBw';
+$settings['hash_salt'] = '9W2V8qyrHBw8YEzx0Bm9lv1yvPvyd11Lk1Jcg812j52VCGNgu1YRPqu9uv_eODQOnVXuStNyjA';
 
 /**
  * Deployment identifier.
@@ -762,6 +762,11 @@ $settings['entity_update_backup'] = TRUE;
  */
 $settings['migrate_node_migrate_type_classic'] = FALSE;
 
+$databases['default']['default'] = [
+  'driver' => 'sqlite',
+  'database' => sys_get_temp_dir() . '/drupa11y.sqlite',
+];
+
 /**
  * Load local development override configuration, if available.
  *
@@ -775,14 +780,8 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  *
  * Keep this code block at the end of this file to take full effect.
  */
-
-if (file_exists(__DIR__ . '/settings.local.php')) {
-  include __DIR__ . '/settings.local.php';
-}
-$databases['default']['default'] = array (
-  'database' => '/var/tmp/njmeetup.sqlite',
-  'prefix' => '',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\sqlite',
-  'driver' => 'sqlite',
-);
-$settings['config_sync_directory'] = 'sites/default/files/config_eZo-vhBVOZy_gnZWchsB24BPq4nZQLQw_DFRxEs-6xmqbW0T3anPjLZxO3LPunXna890f0HoGw/sync';
+#
+# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+#   include $app_root . '/' . $site_path . '/settings.local.php';
+# }
+$settings['config_sync_directory'] = 'sites/default/files/config_EHK58tSVqsWSdiLEneCFag2nu8t2d3O1LRzWMbltFs8UC91sIoerMCXM2tePRZTNOrVGU4ixkA/sync';
