@@ -24,15 +24,12 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Spatie\Crawler\Crawler;
 use Spatie\Crawler\CrawlInternalUrls;
 use Spatie\Crawler\CrawlObserver;
-use Spatie\Crawler\CrawlProfile;
-use Spatie\Crawler\CrawlUrl;
 
 $url = 'http://localhost:8099';
 
@@ -55,7 +52,7 @@ class RaftCrawlObserver extends CrawlObserver
     if ($url->getQuery()) {
       $location .= "?{$url->getQuery()}";
     }
-    echo "<url><loc>$location</loc></url>\n";
+    echo "  <url><loc>$location</loc></url>\n";
   }
 
 
@@ -92,14 +89,12 @@ if (isset($options['h']) || isset($options['help'])) {
   exit(0);
 }
 
-echo <<<XML
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ' .
+  'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' .
+  'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 ' .
+  'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">' . "\n";
 
-XML;
-
-Crawler::create([RequestOptions::ALLOW_REDIRECTS => false])
+Crawler::create()
   ->setCrawlProfile(new CrawlInternalUrls($url))
   ->ignoreRobots()
   ->setUserAgent('Mozilla/5.0 (Spatie Crawler)')
@@ -108,4 +103,4 @@ Crawler::create([RequestOptions::ALLOW_REDIRECTS => false])
   ->setMaximumDepth($options['depth'] ?? 20)
   ->startCrawling($options['url'] ?? $url);
 
-echo "\n</urlset>\n";
+echo "</urlset>\n";

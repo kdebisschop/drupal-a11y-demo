@@ -44,22 +44,22 @@ jobs:
         run: |
           cd web
           ../vendor/bin/drush -n --yes site:install
-          ../vendor/bin/drush pm:enable devel devel_generate simple_sitemap
+          ../vendor/bin/drush pm:enable devel devel_generate
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
           php -S localhost:8099 .ht.router.php 2>&1 > /dev/null &
-          ../vendor/bin/drush simple-sitemap:generate
+          php ../scripts/spider.php > map-source.xml
 
       - name: Scan Site as Anonymous
         run: |
           cd web
-          ../node_modules/.bin/pa11y-ci -c ../.pa11yci || echo "Errors Found!"
+          ../node_modules/.bin/pa11y-ci -c ../.pa11yci --sitemap http://localhost:8099/map-source.xml || echo "Errors Found!"
 
       - name: Scan Site as Admin
         run: |
           cd web
           curl -s http://localhost:8099/sitemap.xml > map-source.xml
-          grep -Ev '^ ' map-source.xml > map.xml
+          head -n 1 map-source.xml > map.xml
           printf "<url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> map.xml
           grep '^ ' map-source.xml >> map.xml
           echo '</urlset>' >> map.xml
