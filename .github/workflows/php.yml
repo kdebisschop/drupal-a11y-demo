@@ -48,18 +48,15 @@ jobs:
           ../vendor/bin/drush pm:enable devel devel_generate
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
+          php -S localhost:8099 .ht.router.php 2> /dev/null &
 
-      - name: Scan Site as Anonymous
+      - name: Scan Site
         run: |
           cd web
-          php -S localhost:8099 .ht.router.php 2>&1 > /dev/null &
+          # First scan as anonymous.
           php ../scripts/spider.php > sites/default/files/map-source.xml
           ../node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map-source.xml || echo "Errors Found!"
-
-      - name: Scan Site as Admin
-        run: |
-          cd web
-          php -S localhost:8099 .ht.router.php 2>&1 > /dev/null &
+          # Then scan as user 1.
           head -n 1 sites/default/files/map-source.xml > sites/default/files/map.xml
           printf "  <url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> sites/default/files/map.xml
           grep '^ ' map-source.xml >> sites/default/files/map.xml
