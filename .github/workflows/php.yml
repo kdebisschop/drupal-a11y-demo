@@ -49,18 +49,18 @@ jobs:
           ../vendor/bin/drush devel-generate:content 10 --bundles=article
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
           php -S localhost:8099 .ht.router.php 2>&1 > /dev/null &
-          php ../scripts/spider.php > map-source.xml
+          php ../scripts/spider.php > sites/default/files/map-source.xml
 
       - name: Scan Site as Anonymous
         run: |
           php scripts/spider.php > web/map-source.xml
-          node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/map-source.xml || echo "Errors Found!"
+          node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map-source.xml || echo "Errors Found!"
 
       - name: Scan Site as Admin
         run: |
-          head -n 1 web/map-source.xml > web/map.xml
-          printf "<url><loc>%s</url></loc>\n" "$(../vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> web/map.xml
-          grep '^ ' web/map-source.xml >> web/map.xml
-          echo '</urlset>' >> web/map.xml
-          cat web/map.xml
-          node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/map.xml || echo "Errors Found!"
+          head -n 1 web/sites/default/files/map-source.xml > web/sites/default/files/map.xml
+          printf "<url><loc>%s</url></loc>\n" "$(vendor/bin/drush --uri=http://localhost:8099/ --no-browser uli /)" >> web/sites/default/files/map.xml
+          grep '^ ' web/sites/default/files/map-source.xml >> web/sites/default/files/map.xml
+          echo '</urlset>' >> web/sites/default/files/map.xml
+          cat web/sites/default/files/map.xml
+          node_modules/.bin/pa11y-ci --sitemap http://localhost:8099/sites/default/files/map.xml || echo "Errors Found!"
