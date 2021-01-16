@@ -21,9 +21,6 @@ pipeline {
       }
     }
 
-    stage ('Scan:') {
-    }
-
     stage('Test:') {
       steps {
         sh """
