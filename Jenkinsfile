@@ -29,10 +29,11 @@ pipeline {
               sh 'cd web ; php -S 0.0.0.0:80 .ht.router.php & ; sleep 1'
             }
             docker.image('florenttorregrosa/pa11y-ci').inside("--link ${c.id}:drupa11y.test -v ${env.WORKSPACE}:/workspace") {
-              docker-compose run pa11y_ci /bin/sh -c "pa11y-ci --sitemap https://drupa11y.test/drupa11y-map.xml --config /workspace/.pa11yci"
+              sh 'pa11y-ci --sitemap https://drupa11y.test/drupa11y-map.xml --config /workspace/.pa11yci'
             }
           }
         }
+        sh 'pa11y-ci-reporter-html --source <file> --destination <directory>'
       }
     }
 
