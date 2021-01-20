@@ -1,0 +1,29 @@
+<?xml>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url><loc>http://drupa11y.test/</loc></url>
+  <url><loc>http://drupa11y.test/user/login</loc></url>
+  <url><loc>http://drupa11y.test/user/register</loc></url>
+  <url><loc>http://drupa11y.test/node/1</loc></url>
+  <url><loc>http://drupa11y.test/node/2</loc></url>
+  <url><loc>http://drupa11y.test/node/3</loc></url>
+  <url><loc>http://drupa11y.test/node/4</loc></url>
+  <url><loc>http://drupa11y.test/node/5</loc></url>
+  <url><loc>http://drupa11y.test/node/6</loc></url>
+  <url><loc>http://drupa11y.test/node/7</loc></url>
+  <url><loc>http://drupa11y.test/node/8</loc></url>
+  <url><loc>http://drupa11y.test/node/9</loc></url>
+  <url><loc>http://drupa11y.test/node/10</loc></url>
+  <url><loc>http://drupa11y.test/node/11</loc></url>
+  <url><loc>http://drupa11y.test/node/12</loc></url>
+  <url><loc>http://drupa11y.test/node/13</loc></url>
+  <url><loc>http://drupa11y.test/node/14</loc></url>
+  <url><loc>http://drupa11y.test/node/15</loc></url>
+  <url><loc>http://drupa11y.test/node/16</loc></url>
+  <url><loc>http://drupa11y.test/node/17</loc></url>
+  <url><loc>http://drupa11y.test/node/18</loc></url>
+  <url><loc>http://drupa11y.test/node/19</loc></url>
+  <url><loc>http://drupa11y.test/node/20</loc></url>
+  <url><loc>http://drupa11y.test/taxonomy/term/1/feed</loc></url>
+</urlset>

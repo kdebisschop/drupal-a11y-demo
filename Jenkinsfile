@@ -6,6 +6,9 @@ pipeline {
 
     stage('Build:') {
       steps {
+        script {
+          baseImage = docker.build('drupa11y:latest', '.')
+        }
         sh """
           composer install --ignore-platform-reqs --prefer-dist --no-progress --no-suggest
           cd web
@@ -15,21 +18,21 @@ pipeline {
           ../vendor/bin/drush devel-generate:content 10 --bundles=page
         """
       }
+      post { always { sh 'mkdir ci' } }
     }
 
     stage('Test:') {
       steps {
-        sh """
-          cd web
-          php -S 127.0.0.1:8099 .ht.router.php 2> /dev/null &
-          php ../scripts/spider.php > map-source.xml
-          ../node_modules/.bin/pa11y-ci --sitemap http://127.0.0.1:8099/map-source.xml || echo "Errors Found!"
-          head -n 2 map-source.xml > map.xml
-          printf "  <url><loc>%s</url></loc>\n" "\$(../vendor/bin/drush --uri=http://127.0.0.1:8099/ --no-browser uli /)" >> map.xml
-          grep '^ ' map-source.xml >> map.xml
-          echo '</urlset>' >> map.xml
-          ../node_modules/.bin/pa11y-ci --sitemap http://127.0.0.1:8099/map.xml || echo "Errors Found!"
-        """
+        script {
+          baseImage.withRun() { c ->
+            baseImage.inside("--link ${c.id}:drupa11y.test") {
+              sh 'cd web ; php -S 0.0.0.0:80 .ht.router.php & ; sleep 1'
+            }
+            docker.image('florenttorregrosa/pa11y-ci').inside("--link ${c.id}:drupa11y.test -v ${env.WORKSPACE}:/workspace") {
+              docker-compose run pa11y_ci /bin/sh -c "pa11y-ci --sitemap https://drupa11y.test/drupa11y-map.xml --config /workspace/.pa11yci"
+            }
+          }
+        }
       }
     }
 

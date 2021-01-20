@@ -4,27 +4,14 @@
  * @file
  * Creates a sitemap for the site.
  *
- * If crawl need to be authenticated, add code like this to credentials.inc:
- *
- * ```
- * if ($_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
- *   $conf['session_inc'] = './includes/pa11y-session.inc';
- *   define('PA11Y_SESSION_INC_SESSION_ID', 'VyxK4FU6uN5Ivr4kAWjAc56sXS3z2u9PzHZ,QmTbjvlyLVXcFjOrbGoQHFKx39jH');
- *   define('PA11Y_SESSION_INC_USER_ID', 1215);
- * }
- * ```
- *
- * A handy way to generate a session ID is
- *
- * ```
- * openssl rand -base64 48 | tr /+= ,-
- * ```
+ * If crawl need to be authenticated, comment `return $this->redirect` in
+ * Drupal\user\Controller\UserController::resetPassLogin and use link from
+ * `drush uli` to start the crawl.
  */
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Spatie\Crawler\Crawler;
