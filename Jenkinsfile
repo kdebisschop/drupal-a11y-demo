@@ -19,6 +19,7 @@ pipeline {
           baseImage.withRun() { c ->
             baseImage.inside("--link ${c.id}:drupa11y.test") {
               sh '''
+                cd /var/www/web
                 drush -n --yes site:install
                 drush pm:enable devel devel_generate
                 drush devel-generate:content 10 --bundles=article
