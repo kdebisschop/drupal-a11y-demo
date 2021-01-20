@@ -38,6 +38,9 @@ COPY --chown=www-data:www-data web/sites/default/settings.php /var/www/web/sites
 
 ENV PATH "/var/www/vendor/bin:${PATH}"
 
-RUN cd web \
-  && drush -n --yes site:install \
+WORKDIR /var/www/web
+
+RUN drush -n --yes site:install \
   && drush pm:enable devel devel_generate
+
+CMD ['php', '-S', '0.0.0.0:80', '.ht.router.php']

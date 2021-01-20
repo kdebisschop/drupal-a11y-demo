@@ -19,8 +19,6 @@ pipeline {
           baseImage.withRun() { c ->
             baseImage.inside("--link ${c.id}:drupa11y.test") {
               sh '''
-                cd web
-                php -S 0.0.0.0:80 .ht.router.php &
                 ../vendor/bin/drush devel-generate:content 10 --bundles=article
                 ../vendor/bin/drush devel-generate:content 10 --bundles=page
               '''
