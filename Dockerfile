@@ -40,7 +40,4 @@ ENV PATH "/var/www/vendor/bin:${PATH}"
 
 WORKDIR /var/www/web
 
-RUN drush -n --yes site:install \
-  && drush pm:enable devel devel_generate
-
 CMD ["php", "-S", "0.0.0.0:80", ".ht.router.php"]
